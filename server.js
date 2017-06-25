@@ -15,7 +15,7 @@ server.set('view engine', 'ejs');
 
 server.get("/", (req, res) => {
     res.render('index',{
-        content: "<em>hello from ejs</em>"
+        content: "..."
     })
 });
 
