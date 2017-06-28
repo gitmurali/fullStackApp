@@ -4,11 +4,16 @@
 
   .category-name {
     border-bottom: 1px solid #ccc;
-    padding: .25em .5em;
+    padding: 0.25em 0.5em;
     font-weight: bold;
     background-color: #eee;
   }
+
   .contest-name {
-    padding: .5em;
+    padding: 0.5em;
   }
+}
+
+.link {
+  cursor: pointer;
 }

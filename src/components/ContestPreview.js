@@ -1,17 +1,28 @@
-import React from "react";
-import Reorder from 'react-icons/md/reorder';
+import React, { Component } from 'react';
 
-const ContestPreview = (contest) => {
+class ContestPreview extends Component {
+  handleClick = () => {
+    this.props.onClick(this.props.id);
+  };
+  render() {
     return (
-        <div className="ContestPreview">
-            <div className="category-name">
-                <Reorder/> {contest.categoryName}
-            </div>
-            <div className="contest-name">
-                {contest.contestName}
-            </div>
+      <div className="link ContestPreview" onClick={this.handleClick}>
+        <div className="category-name">
+          {this.props.categoryName}
         </div>
+        <div className="contest-name">
+          {this.props.contestName}
+        </div>
+      </div>
     );
+  }
 }
+
+ContestPreview.propTypes = {
+  id: React.PropTypes.number.isRequired,
+  categoryName: React.PropTypes.string.isRequired,
+  contestName: React.PropTypes.string.isRequired,
+  onClick: React.PropTypes.func.isRequired,
+};
 
 export default ContestPreview;

@@ -1,42 +1,37 @@
-import * as React from "react";
-import Header from "./Header";
-import ContestPreview from "./ContestPreview";
-import axios from 'axios';
+import React from 'react';
+import Header from './Header';
+import ContestList from './ContestList';
+
+const pushState = (obj, url) =>
+  window.history.pushState(obj, '', url);
 
 class App extends React.Component {
+  state = {
+    pageHeader: 'Naming Contests',
+    contests: this.props.initialContests
+  };
+  componentDidMount() {
 
-    state = {
-        pageHeader: 'Naming Contests',
-        contests: []
-    }
-
-    componentDidMount() {
-        //ajax
-        axios.get('/api/contests').then(res => {
-            this.setState({
-                contests: res.data.contests
-            })
-        }).catch(
-            console.error
-        )
-    }
-
-    componentWillUnmount() {
-
-    }
-
-    render() {
-        return (
-            <div className="App">
-                <Header message={this.state.pageHeader} />
-                <div>
-                    {this.state.contests.map( contest =>
-                            <ContestPreview key={contest.id} {...contest} />
-                    )}
-                </div>
-            </div>
-        );
-    };
+  }
+  componentWillUnmount() {
+    // clean timers, listeners
+  }
+  fetchContest = (contestId) => {
+    pushState(
+      { currentContestId: contestId },
+      `/contest/${contestId}`
+    );
+  };
+  render() {
+    return (
+      <div className="App">
+        <Header message={this.state.pageHeader} />
+        <ContestList
+          onContestClick={this.fetchContest}
+          contests={this.state.contests} />
+      </div>
+    );
+  }
 }
 
 export default App;
